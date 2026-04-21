@@ -28,5 +28,5 @@ analysis/participant_distibution.png
 
 # Lean repo: duplicate spreadsheets and drafts (keep locally if needed)
 analysis/clean_xlsx_data_format/
-dataset/Cleaned Data/*.xlsx
+dataset/cleaned_data/*.xlsx
 analysis/testing_draft.R

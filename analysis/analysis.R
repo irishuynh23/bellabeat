@@ -19,7 +19,7 @@ get_project_root <- function() {
 }
 
 project_root <- get_project_root()
-clean_dir <- file.path(project_root, "dataset", "Cleaned Data")
+clean_dir <- file.path(project_root, "dataset", "cleaned_data")
 figures_dir <- file.path(project_root, "assets", "dashboard")
 dir.create(figures_dir, recursive = TRUE, showWarnings = FALSE)
 

@@ -2,7 +2,7 @@
 
 ## Approved Folders
 - Input only: `Raw Data/` (not committed; add CSVs locally after clone)
-- Output only: `Cleaned Data/` (committed outputs are **CSV** only; legacy `.xlsx` copies stay local and are gitignored)
+- Output only: `cleaned_data/` (committed outputs are **CSV** only; legacy `.xlsx` copies stay local and are gitignored)
 
 ## Excluded Folders
 Do not use these folders in scripts or analysis:
@@ -16,7 +16,7 @@ Do not use these folders in scripts or analysis:
 ## Refresh Steps
 1. Place/confirm source CSV files in `Raw Data/`.
 2. Run `analysis/clean.R` to regenerate cleaned outputs.
-3. Confirm new files in `Cleaned Data/`:
+3. Confirm new files in `cleaned_data/`:
    - `dailyActivity_cleaned.csv`
    - `sleepDay_cleaned.csv`
    - `weightLogInfo_cleaned.csv`

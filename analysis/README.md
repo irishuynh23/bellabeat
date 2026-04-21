@@ -3,7 +3,7 @@
 This folder contains the reproducible R workflow for cleaning and analyzing Bellabeat data.
 
 ## Scripts
-- `clean.R`: loads raw CSV files from `dataset/Raw Data/`, cleans/transforms them, and writes standardized CSV outputs to `dataset/Cleaned Data/`.
+- `clean.R`: loads raw CSV files from `dataset/Raw Data/`, cleans/transforms them, and writes standardized CSV outputs to `dataset/cleaned_data/`.
 - `analysis.R`: loads cleaned outputs, generates KPI tables and chart assets for the README and `assets/dashboard/`.
 - `sourceKaggle.R`: legacy exploratory script kept for reference only.
 

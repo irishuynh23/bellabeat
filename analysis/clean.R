@@ -1,6 +1,6 @@
 ######### PROCESS / CLEAN ###############
 # This script only reads from dataset/Raw Data and writes cleaned CSVs
-# to dataset/Cleaned Data. Fitabase date-range folders are intentionally excluded.
+# to dataset/cleaned_data. Fitabase date-range folders are intentionally excluded.
 
 suppressPackageStartupMessages({
   library(dplyr)
@@ -22,7 +22,7 @@ get_project_root <- function() {
 
 project_root <- get_project_root()
 raw_dir <- file.path(project_root, "dataset", "Raw Data")
-clean_dir <- file.path(project_root, "dataset", "Cleaned Data")
+clean_dir <- file.path(project_root, "dataset", "cleaned_data")
 dir.create(clean_dir, recursive = TRUE, showWarnings = FALSE)
 
 # Importing data from dataset/Raw Data only
