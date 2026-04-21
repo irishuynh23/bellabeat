@@ -1,0 +1,32 @@
+.DS_Store
+*.log
+*.tmp
+
+# R / RStudio
+.Rhistory
+.RData
+.Ruserdata
+analysis/.Rproj.user/
+.Rlibs/
+
+# Local IDE noise
+.vscode/
+.idea/
+
+# Optional local Tableau cache/work files
+*.twb~
+*.temp
+
+# Excluded project folders (not part of approved workflow)
+dataset/Fitabase Data 4.12.16-5.12.16/
+dataset/Fitabase Data 3.12.16-4.11.16/
+dataset/Raw Data/
+analysis/raw_csv_data_format/
+
+# One-off assets not for version control
+analysis/participant_distibution.png
+
+# Lean repo: duplicate spreadsheets and drafts (keep locally if needed)
+analysis/clean_xlsx_data_format/
+dataset/Cleaned Data/*.xlsx
+analysis/testing_draft.R
