@@ -1,6 +1,6 @@
 # 📊 Bellabeat Case Study — Smart Device Usage Analysis
 
-Capstone-style analysis of Fitbit tracker data to infer how people use smart wellness devices, then translate patterns into **product and marketing ideas** for Bellabeat (women-focused health tech).
+Hands-on **end-to-end data analytics** project in **R**: reproducible cleaning and joins on Fitbit exports, KPIs and exploratory analysis (activity, sleep, hourly usage), correlation and distribution checks, and **stakeholder-ready recommendations** for Bellabeat’s app and marketing strategy (women-focused digital health).
 
 ### The six-step data analysis process
 
@@ -11,7 +11,7 @@ The case study follows the **six-step data analysis process** used in the Google
 | **1** | **Ask** | Business task, questions, stakeholders |
 | **2** | **Prepare** | Data source, scope, what’s in / out of git |
 | **3** | **Process** | Cleaning, joins, standardized tables (`clean.R`) |
-| **4** | **Analyze** | KPI checks, visuals that support slide findings (`analysis.R`) |
+| **4** | **Analyze** | KPI checks, visuals and narrative (`analysis.R`) |
 | **5** | **Share** | Canva slides, reproducible R commands, figures |
 | **6** | **Act** | Product + marketing recommendations, next data steps |
 
@@ -169,21 +169,29 @@ Weight logs are retained in cleaned form but are **sparse** (few users); primary
 
 ## 4. Analyze
 
-Findings below are verified against **this repo’s CSVs** and **`analysis/`** scripts (not the slide deck).
+Findings below combine **patterns in this Fitbit sample** (cleaned in [`clean.R`](analysis/clean.R), summarized in [`analysis.R`](analysis/analysis.R)) with **public-health context** where it helps interpret step and sleep levels.
 
-### Sedentary minutes vs minutes asleep (slide 6)
-Days with **more minutes asleep** tend to show **fewer sedentary minutes** the same calendar day—the scatter slopes downward.
+### 1. Sedentary minutes vs minutes asleep
 
-**Proof:** [`dailySleepActivity_merged_cleaned.csv`](dataset/cleaned_data/dailySleepActivity_merged_cleaned.csv): Pearson **r ≈ -0.601** between `TotalMinutesAsleep` and `SedentaryMinutes`. [`analysis/analysis.R`](analysis/analysis.R) plots the same pair for a quick ggplot check (`assets/dashboard/sleep_vs_sedentary.png`). Figure below exports the chart you built for reporting.
+For most people in this sample, **nightly sleep falls in about 5–9 hours** (roughly **300–540 minutes**). On the scatter plot, **sedentary minutes and minutes asleep move in opposite directions**—a **negative correlation**: days with **more** time asleep tend to show **less** sedentary time, and vice versa.
+
+In this analysis, among people logging **more than 16 sedentary hours per day** (**960 minutes**), **about 75%** also report **under 3 hours asleep** (**180 minutes**) that night—suggesting that **heavy sedentary days** often coincide with **very short sleep**. **More active** patterns in the data line up with **better-reported sleep** on the same calendar day.
+
+**Takeaway:** **Lower daily movement and very high sedentary time align with shorter, harder nights of sleep** in this sample—useful for thinking about breaking up sitting time and protecting sleep.
 
 ![Sedentary minutes vs total minutes asleep](assets/findings/slide06_sedentary_vs_sleep.png)
 
 ---
 
-### Daily activity & sleep summaries (slide 7)
-**Daily activity** statistics (steps, distances, intensity minutes, sedentary minutes) and **daily sleep** statistics (`TotalMinutesAsleep`, `TotalTimeInBed`) describe baseline ranges before merging.
+### 2. Daily activity & sleep summaries
 
-**Proof:** [`dailyActivity_cleaned.csv`](dataset/cleaned_data/dailyActivity_cleaned.csv) and [`sleepDay_cleaned.csv`](dataset/cleaned_data/sleepDay_cleaned.csv) from [`clean.R`](analysis/clean.R). Column means match your tables — activity **Mean TotalSteps ≈ 7638**, **Mean SedentaryMinutes ≈ 991.2**; sleep **Mean TotalMinutesAsleep ≈ 419.2**, **Mean TotalTimeInBed ≈ 458.5** (screenshots may round). These summaries use **all** respective daily rows, not only the merged subset.
+Summaries across **daily activity** and **daily sleep** rows give a baseline before merging days that have both measures.
+
+Population research often cites **roughly 8,000–10,000 steps per day** as a practical activity target; work summarized by the **National Institutes of Health** and related studies ties **higher step counts** to better health outcomes—for example, research has associated **about 8,000 steps/day** with a **much lower risk of dying from any cause** versus lower counts, and **about 12,000 steps/day** with an **even larger reduction in risk** (exact figures vary by study and population). In **this** dataset, the **mean daily steps sit below** that ballpark **“recommended” range**, so the sample skews toward **less movement** than those benchmarks.
+
+**Sedentary time is very high on average**: about **991 minutes** per day in the daily activity table—roughly **16.5 hours**, or about **two-thirds of the day** spent sedentary.
+
+**Sleep:** Mean time asleep in the sleep table is **about 7 hours** (**~420 minutes**) per night on average—close to common **7-hour** guidelines, with distribution spread above and below that.
 
 ![Daily activity summary stats](assets/findings/slide07_daily_activity_summary.png)
 
@@ -191,19 +199,21 @@ Days with **more minutes asleep** tend to show **fewer sedentary minutes** the s
 
 ---
 
-### Participant distribution by step bands (slide 8)
-Across **distinct users**, **mean daily steps** fall into bands from low to high; distribution is weighted toward moderate counts rather than extremes.
+### 3. Participant distribution by step bands
 
-**Proof:** From [`dailyActivity_cleaned.csv`](dataset/cleaned_data/dailyActivity_cleaned.csv): **mean `TotalSteps` per `Id`** (**33** users), bins **&lt; 5k | 5k–7.5k | 7.5k–10k | 10k–12.5k | &gt; 12.5k** → about **24% / 27% / 27% / 15% / 6%**. Any small gap vs a chart tool is rounding or bin-definition choice.
+When each **participant** is placed in a bucket by **mean daily steps**, **about 40%** fall **under 7,500 steps/day**—**below** the rough **7,500–10,000 steps/day** band often discussed in **NIH-aligned** guidance. **More than a third** land in the **7,500–10,000 steps/day** range.
+
+**Takeaway:** **Most participants are at least moderately active** (middle bands add up), but a **large minority** sits **under the common 7,500-step** benchmark—worth addressing with realistic nudges and progressive goals.
 
 ![Participant distribution by activity level](assets/findings/slide08_step_distribution.png)
 
 ---
 
-### Hourly intensity, steps, and calories (slide 9)
-After expanding hourly files in [`clean.R`](analysis/clean.R), averages by clock hour show low movement overnight, a **midday** bump, and a stronger **early-evening** peak.
+### 4. Hourly intensity, steps, and calories
 
-**Proof:** [`hourly_pattern_summary.csv`](dataset/cleaned_data/hourly_pattern_summary.csv) from [`analysis.R`](analysis/analysis.R): for each hour, mean `StepTotal`, mean `TotalIntensity`, mean hourly `Calories`. Example **steps** peaks: **18:00** (~599), **19:00** (~583), **17:00** (~550); **12:00–14:00** elevated (~538–548). Hourly **Calories** follow **kcal per clock-hour bucket** as in the Fitbit export.
+Hourly averages (after parsing clock time in [`clean.R`](analysis/clean.R)) show **when** this sample moves and burns energy. **Highest average steps** line up with **noon–2 PM** and **5–7 PM**. **Peak average intensity** follows the **same windows** (**12 PM–2 PM** and **5 PM–7 PM**). **Calorie burn per hour** is **highest around midday** and again in the **early evening (roughly 5–7 PM)**, matching mealtimes, commutes, or planned exercise for many people.
+
+That pattern supports **timing nudges** (hydration, movement breaks, or workouts) when users are already more active—not only overnight, when averages are flat.
 
 ![Average intensity per hour](assets/findings/slide09_intensity_per_hour.png)
 
@@ -263,16 +273,6 @@ Recommendations below follow the **findings in §4** (segment, features, and cha
 
 ### 🔭 Next data steps
 - Larger, more representative sample; Bellabeat first-party app data where available; longer time windows to validate seasonality.
-
----
-
-## About me
-
-I’m **Iris Huynh**, a data analytics learner focused on **turning behavioral and health-related data into clear, actionable stories** for product and marketing decisions. This repository is my **Google Data Analytics capstone** (Bellabeat case study): data prep and analysis in **R**, structured around the **Ask → Act** process, with a **Canva** deck for stakeholders.
-
-- **Focus areas:** data cleaning, exploratory analysis, visualization, and communication of recommendations.  
-- **This project:** Fitbit-based smart-device usage patterns, sleep and activity insights, and ideas for the Bellabeat app and go-to-market story.  
-- **Connect:** [GitHub profile](https://github.com/irishuynh23). Add your LinkedIn, portfolio, or email on this line when you’re ready.
 
 ---
 
