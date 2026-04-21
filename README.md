@@ -245,7 +245,9 @@ Source: [`dataset/cleaned_data/kpi_summary.csv`](dataset/cleaned_data/kpi_summar
 ## 5. Share
 
 ### 🎬 Presentation
-- **[Open slides on Canva](https://canva.link/emsulvwxmh7dtii)** (same design as your deck; use **Share → Anyone with the link** in Canva if viewers can’t open it).
+- **[Bellabeat Presentation](presentation/bellabeat_presentation.pdf)**
+
+![Bellabeat Wellness App — title slide](assets/bellabeat_presentation_cover.png)
 
 ### 🔁 How to reproduce figures and tables
 From the project root (with R packages installed, e.g. `dplyr`, `tidyr`, `lubridate`, `readr`, `ggplot2`):
