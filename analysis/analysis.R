@@ -76,29 +76,7 @@ ggsave(
   dpi = 300
 )
 
-# Plot 2: Steps vs calories
-plot_steps_vs_calories <- ggplot(
-  daily_merge,
-  aes(x = TotalSteps, y = Calories)
-) +
-  geom_point(alpha = 0.5, color = "#FF006E") +
-  geom_smooth(method = "lm", se = FALSE, color = "#9D0208") +
-  labs(
-    title = "Daily Steps vs Calories",
-    x = "Total Steps",
-    y = "Calories"
-  ) +
-  theme_minimal()
-
-ggsave(
-  filename = file.path(figures_dir, "steps_vs_calories.png"),
-  plot = plot_steps_vs_calories,
-  width = 8,
-  height = 5,
-  dpi = 300
-)
-
-# Plot 3: Hourly pattern table output for Tableau
+# Hourly pattern table output for Tableau / exports
 hourly_pattern <- hourly_steps %>%
   group_by(stepsHour) %>%
   summarise(avg_steps = mean(StepTotal, na.rm = TRUE), .groups = "drop") %>%

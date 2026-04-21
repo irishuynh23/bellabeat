@@ -1,4 +1,5 @@
 .DS_Store
+**/.DS_Store
 *.log
 *.tmp
 
@@ -22,11 +23,7 @@ dataset/Fitabase Data 4.12.16-5.12.16/
 dataset/Fitabase Data 3.12.16-4.11.16/
 dataset/Raw Data/
 analysis/raw_csv_data_format/
-
-# One-off assets not for version control
-analysis/participant_distibution.png
-
-# Lean repo: duplicate spreadsheets and drafts (keep locally if needed)
 analysis/clean_xlsx_data_format/
+
+# Lean repo
 dataset/cleaned_data/*.xlsx
-analysis/testing_draft.R
